@@ -5,22 +5,29 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
-    public Rigidbody2D target;
+    public float health;
+    public float maxHealth;
 
+    public RuntimeAnimatorController[] animCon;
+    public Rigidbody2D target;
     private Rigidbody2D rigid;
     private SpriteRenderer spriter;
+    private Animator anim;
 
-    private bool isLive = true;
+    private bool isLive;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         
     }
     private void OnEnable()
     {
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
+        isLive = true;
+        health = maxHealth;
     }
 
     private void FixedUpdate()
@@ -40,5 +47,13 @@ public class Enemy : MonoBehaviour
             return;
 
         spriter.flipX = target.position.x < rigid.position.x;
+    }
+
+    public void Init(SpawnData data)
+    {
+        anim.runtimeAnimatorController = animCon[data.spriteType];
+        speed = data.speed;
+        maxHealth = data.health;
+        health = data.health;
     }
 }
