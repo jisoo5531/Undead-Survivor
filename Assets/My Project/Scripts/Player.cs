@@ -25,18 +25,25 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        
-        
+        if (false == GameManager.instance.isLive)
+            return;
+
     }
 
     private void FixedUpdate()
     {
+        if (false == GameManager.instance.isLive)
+            return;
+        
         Vector2 nextVec = inputVector * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
     }
 
     private void LateUpdate()
     {
+        if (false == GameManager.instance.isLive)
+            return;
+
         anim.SetFloat("Speed", inputVector.magnitude);
 
         if (inputVector.x != 0)
