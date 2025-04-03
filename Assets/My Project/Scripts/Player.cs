@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriter;
     private Animator anim;
     public Hand[] hands;
-    public RuntimeAnimatorController[] animCon;
+    public RuntimeAnimatorController[] animCon; // TODO : RuntimeAnimator
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     }
 
     private void OnEnable()
-    {
+    {        
         speed *= Character.Speed;
         anim.runtimeAnimatorController = animCon[GameManager.instance.playerId];
     }
