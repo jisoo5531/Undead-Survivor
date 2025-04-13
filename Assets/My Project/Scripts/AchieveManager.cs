@@ -29,8 +29,6 @@ public class AchieveManager : MonoBehaviour
         }        
     }
 
-    
-
     private void Start()
     {
         UnlockCharacter();
@@ -98,6 +96,7 @@ public class AchieveManager : MonoBehaviour
     IEnumerator NoticeRoutine()
     {
         uiNotice.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
 
         yield return wait;
 
